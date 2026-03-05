@@ -1,0 +1,16 @@
+node_modules
+dist
+.env
+.env.local
+
+# foundry
+contracts/cache
+contracts/out
+contracts/broadcast
+contracts/lib
+contracts/script/pgp-sig.txt
+contracts/script/pgp-key.txt
+contracts/reports
+
+claude.md
+.claude/
