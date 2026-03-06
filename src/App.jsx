@@ -790,6 +790,7 @@ export default function App() {
             <span className="footer-col-label">Social</span>
             <a href="https://x.com/thurinlabs" target="_blank" rel="noopener noreferrer">X</a>
             <a href="https://farcaster.xyz/thurinlabs.eth" target="_blank" rel="noopener noreferrer">Farcaster</a>
+            <a href="https://www.linkedin.com/company/thurin-labs/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
           <div className="footer-col">
             <span className="footer-col-label">Dev</span>
