@@ -452,8 +452,9 @@ function StepAttest({ active, done, attestation, onPublish }) {
       setPublishStatus({ type: 'info', msg: `Waiting for confirmation… tx: ${hash.slice(0, 10)}…` })
 
       const { createPublicClient, http } = await import('viem')
-      const client = createPublicClient({ chain: mainnet, transport: http() })
-      const receipt = await client.waitForTransactionReceipt({ hash })
+      const rpcUrl = import.meta.env.VITE_ALCHEMY_RPC_URL
+      const client = createPublicClient({ chain: mainnet, transport: http(rpcUrl) })
+      const receipt = await client.waitForTransactionReceipt({ hash, pollingInterval: 4_000 })
 
       if (receipt.status === 'success') {
         setPublishStatus({ type: 'ok', msg: `✓ Attested on-chain.` })
@@ -604,8 +605,9 @@ function YourAttestations({ address }) {
       setRevokeStatus(s => ({ ...s, [index]: { type: 'info', msg: `Waiting for confirmation…` } }))
 
       const { createPublicClient, http } = await import('viem')
-      const client = createPublicClient({ chain: mainnet, transport: http() })
-      await client.waitForTransactionReceipt({ hash })
+      const rpcUrl = import.meta.env.VITE_ALCHEMY_RPC_URL
+      const client = createPublicClient({ chain: mainnet, transport: http(rpcUrl) })
+      await client.waitForTransactionReceipt({ hash, pollingInterval: 4_000 })
 
       setRevokeStatus(s => ({ ...s, [index]: { type: 'ok', msg: 'Revoked.' } }))
       refetchCount()
@@ -641,7 +643,9 @@ function YourAttestations({ address }) {
               <tr key={a.index}>
                 <td className="att-index">{a.index}</td>
                 <td>
-                  {a.fingerprint.toUpperCase().slice(0, 8)}...{a.fingerprint.toUpperCase().slice(-8)}
+                  <a href={`https://scry.thurin.id/#/pgp/${a.fingerprint.toUpperCase()}`} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>
+                    {a.fingerprint.toUpperCase().slice(0, 8)}...{a.fingerprint.toUpperCase().slice(-8)}
+                  </a>
                 </td>
                 <td className="att-date">{formatDate(a.createdAt)}</td>
                 <td>
@@ -787,7 +791,7 @@ export default function App() {
       </div>
 
       <footer className="footer">
-        <span className="footer-version">signet v0.1.0</span>
+        <span className="footer-version">signet v0.2.0</span>
         <div className="footer-columns">
           <div className="footer-col">
             <span className="footer-col-label">Home</span>
