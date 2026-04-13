@@ -100,7 +100,7 @@ function StepSignEth({ active, done, address, onSigned, ethSig }) {
       {active && (
         <div className="fade-in">
           <p className="helper">
-            Run <code>gpg --fingerprint</code> and paste the output below. We'll find the fingerprint automatically.
+            Run <code>gpg --fingerprint</code> and paste the output below. We'll find the fingerprint automatically.<br/>Don't have a PGP key? <a href="https://docs.thurin.id/#/scry/getting-started" target="_blank" rel="noopener noreferrer">Follow the getting started guide</a>.
           </p>
 
           <div className="command-block">
@@ -784,7 +784,7 @@ export default function App() {
             <a href="https://thurin.id" target="_blank" rel="noopener noreferrer">Thurin Labs</a>
             <a href="https://app.thurin.id" target="_blank" rel="noopener noreferrer">Sigil</a>
             <a href="https://scry.thurin.id" target="_blank" rel="noopener noreferrer">Scry</a>
-            <a href="https://thurinlabs.eth.limo" target="_blank" rel="noopener noreferrer">thurinlabs.eth</a>
+            <a href="https://thurin.id/privacy/" target="_blank" rel="noopener noreferrer">Privacy</a>
           </div>
           <div className="footer-col">
             <span className="footer-col-label">Social</span>
