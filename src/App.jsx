@@ -11,8 +11,18 @@ function shortAddr(addr) {
   return addr ? `${addr.slice(0, 6)}…${addr.slice(-4)}` : ''
 }
 
-function copyToClipboard(text) {
+function copyToClipboard(text, e) {
   navigator.clipboard.writeText(text)
+  if (e?.target) {
+    const btn = e.target
+    const original = btn.textContent
+    btn.textContent = 'copied!'
+    btn.classList.add('copied')
+    setTimeout(() => {
+      btn.textContent = original
+      btn.classList.remove('copied')
+    }, 1200)
+  }
 }
 
 // Extract a 40-char hex fingerprint from GPG output or raw input
@@ -107,7 +117,7 @@ function StepSignEth({ active, done, address, onSigned, ethSig }) {
             <span className="prompt">$ </span>
             gpg --fingerprint your@email.com
           </div>
-          <button className="btn btn-sm" onClick={() => copyToClipboard('gpg --fingerprint your@email.com')} style={{ marginTop: 8, marginBottom: 16 }}>
+          <button className="btn btn-sm" onClick={(e) => copyToClipboard('gpg --fingerprint your@email.com', e)} style={{ marginTop: 8, marginBottom: 16 }}>
             copy command
           </button>
 
@@ -321,7 +331,7 @@ function StepSignGpg({ active, done, address, expectedFingerprint, onVerified, p
             <span className="prompt">$ </span>
             {command}
           </div>
-          <button className="btn btn-sm" onClick={() => copyToClipboard(command)} style={{ marginTop: 8 }}>
+          <button className="btn btn-sm" onClick={(e) => copyToClipboard(command, e)} style={{ marginTop: 8 }}>
             copy command
           </button>
 
@@ -367,7 +377,7 @@ function StepSignGpg({ active, done, address, expectedFingerprint, onVerified, p
                 <span className="prompt">$ </span>
                 {exportCommand}
               </div>
-              <button className="btn btn-sm" onClick={() => copyToClipboard(exportCommand)} style={{ marginTop: 8 }}>
+              <button className="btn btn-sm" onClick={(e) => copyToClipboard(exportCommand, e)} style={{ marginTop: 8 }}>
                 copy command
               </button>
 
@@ -479,7 +489,7 @@ function StepAttest({ active, done, attestation, onPublish }) {
               View in Scry
             </a>
             {txHash && (
-              <button className="btn btn-sm" onClick={() => { copyToClipboard(txHash); }}>
+              <button className="btn btn-sm" onClick={(e) => { copyToClipboard(txHash, e); }}>
                 Copy Tx Hash
               </button>
             )}
