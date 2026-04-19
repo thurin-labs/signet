@@ -468,7 +468,7 @@ function StepAttest({ active, done, attestation, onPublish }) {
   }
 
   const explorerUrl = attestation?.ethAddress
-    ? `https://scry.thurin.id/#/eth/${attestation.ethAddress}`
+    ? `https://scry.thurin.id/eth/${attestation.ethAddress}`
     : null
 
   return (
@@ -643,7 +643,7 @@ function YourAttestations({ address }) {
               <tr key={a.index}>
                 <td className="att-index">{a.index}</td>
                 <td>
-                  <a href={`https://scry.thurin.id/#/pgp/${a.fingerprint.toUpperCase()}`} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>
+                  <a href={`https://scry.thurin.id/pgp/${a.fingerprint.toUpperCase()}`} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>
                     {a.fingerprint.toUpperCase().slice(0, 8)}...{a.fingerprint.toUpperCase().slice(-8)}
                   </a>
                 </td>
